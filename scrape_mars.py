@@ -99,6 +99,11 @@ def scrape_facts():
         "value": df.Value,
     }
 
+    html_table = df.to_html()
+    html_table
+
+    !open table.html
+
     return facts
 
 
