@@ -131,10 +131,5 @@ def scrape_hemis():
         img_dict = {"title":img_title, "img_url":img_url}
         mars_hemis.append(img_dict)
         browser.back()
-        
-    hemis = {
-        "title": mars_hemis.img_title,
-        "img_url": mars_hemis.img_url,
-    }
 
-    return hemis
+    return mars_hemis
