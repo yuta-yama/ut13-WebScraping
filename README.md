@@ -1,3 +1,9 @@
+# Screen Capture form Final Render
+
+![mission_to_mars](Images/yuta_mars_screenshot.png)
+
+# Instructions Below
+
 # Mission to Mars
 
 ![mission_to_mars](Images/mission_to_mars.jpg)
