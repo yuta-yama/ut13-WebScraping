@@ -41,7 +41,7 @@ def scrape():
     img = results[0]
     img.click()
 
-    browser.is_element_present_by_css("img.fancybox-image", wait_time=30)
+    browser.is_element_present_by_css("img.fancybox-image", wait_time=1)
 
     time.sleep(2)
     html = browser.html

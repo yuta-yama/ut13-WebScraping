@@ -10,57 +10,76 @@
   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}" />
 </head>
 
-<body>
+<body style="background-color: black">
     <div class="container top-center">
-        <div class="jumbotron text-center">
-            <h1>Mission to Mars</h1>
-            <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape New Data</a></p>
+        <div class="jumbotron text-center" style="background-size: cover; background-image: url(https://pi.tedcdn.com/r/talkstar-assets.s3.amazonaws.com/production/playlists/playlist_414/big_deal_mars_1200x627.jpg?quality=89&w=800)">
+            <h1 style="color: white">Mission to Mars</h1><br>
+            <p><a class="btn btn-primary btn-lg" href="/scrape" role="button" style="background-color: darkred; border-color: white;">Scrape New Data</a></p>
         </div>
     </div>
 
     <div class="container middle">
         <div class="row">
             <div class="col-md-12 col-sm-12 news">
-                <h3>Mars News</h3>
-                <p> <h4>{{ mars_data.news_title }} </h4></p>
-                <p> {{ mars_data.news_p }} </p>
+                <div class = "card">
+                    <h3 class="card-header" style="color: darkred">Mars News</h3>
+                    <div class = "card-body">
+                        <p class="card-title"> <h4><b>{{ mars_data.news_title }} </b></h4></p>
+                        <p class="card-text"><h5>{{ mars_data.news_p }} </h5></p>
+                    </div>
+                </div>
             </div>
-        </div>
+        </div><br>
 
         <div class="row">
             <div class="col-md-8">
-                <h3>Featured Mars Image</h3>
-                <p class="featured_image"> <img src={{ mars_data.featured_image }} width=100%> </p>
+                <div class = "card">
+                    <h3 class="card-header" style="color: darkred">Featured Mars Image</h3>
+                    <div class= "card-body">
+                        <p class="card-image"> <img src={{ mars_data.featured_image }} width=100%> </p>
+                    </div>
+                </div><br>
             </div>
+
             <div class="col-md-4">
-                <p><h3>Current Weather on Mars</h3></p>
-                <p>{{ mars_data.weather }}</p>
-                <p><h3>Mars Facts</h3></p>
-                <p> {{ mars_data.facts|safe }}</p>
+                <div class = "card">
+                    <h3 class = "card-header" style="color: darkred">Current Weather on Mars</h3>
+                    <div class = "card-body">
+                        <p class="card-text">{{ mars_data.weather }}</p>
+                    </div>
+                </div><br>
+                <div class = "card">
+                    <h3 class = "card-header" style="color: darkred">Mars Facts</h3>
+                    <div class = "card-body">
+                        <p> {{ mars_data.facts|safe }}</p>
+                    </div>
+                </div>
             </div>
-        </div>
+        </div><br>
     </div>
 
     <div class="container middle">
         <div class="row">
             <div class="col-md-12">
-                <h3>Mars Hemispheres</h3><br>
+                <div class = "card">
+                    <h3 class="card-header" style="color: darkred">Mars Hemispheres</h3>
+                </div>
             </div>
+        </div><br>
+                    
+        <div class="row">
             {% for hemisphere in mars_data.mars_hemis %}
             <div class="col-md-6 col-sm-12 col-md-6">
-                <h4>{{ hemisphere.title }}</h4>
-                <img src={{ hemisphere.img_url}} width="100%">
+                <div class = "card" style="background-color: black; border-width: 1px; border-color: white;">
+                    <h4 class="card-header" style="background-color: white">{{ hemisphere.title }}</h4>
+                    <div class="card-body">
+                        <img src={{ hemisphere.img_url}} width="100%" class="card-img-top">
+                    </div>
+                </div><br>
             </div>
             {% endfor %}
         </div>
     </div>
-
-    <!-- <div class="card" style="width: 18rem;">
-      <img class="card-img-top" src="..." alt="Card image cap">
-      <div class="card-body">
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-      </div>
-    </div> -->
 
   </div>
 </body>
