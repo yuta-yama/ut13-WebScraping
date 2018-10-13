@@ -1,124 +1,93 @@
 from splinter import Browser
 from bs4 import BeautifulSoup
 from datetime import datetime
+import time
+import collections
+import pymongo
+import pandas as pd
 
 
 def init_browser():
     executable_path = {"executable_path": "/usr/local/bin/chromedriver"}
     return Browser("chrome", **executable_path, headless=False)
 
+def scrape():
 
-def scrape_news():
+    scrape_data_dict = {}
 
+    ##### SCRAPE NEWS #####
     browser = init_browser()
-
     url = 'https://mars.nasa.gov/news'
     browser.visit(url)
-
+    time.sleep(3)
     html = browser.html
     soup = BeautifulSoup(html, 'html.parser')
 
     news_title = str(soup.find('div', class_='content_title').text)
     news_p = str(soup.find('div', class_='article_teaser_body').text)
-    time_stamp = str(datetime.now())
+    news_time = str(datetime.now())
 
-    news = {
-        "time": time_stamp,
-        "title": news_title,
-        "paragraph": news_p,
-    }
+    scrape_data_dict['news_time'] = news_time
+    scrape_data_dict['news_title'] = news_title
+    scrape_data_dict['news_p'] = news_p
 
-    return news
+    ##### SCRAPE FEATURED IMAGE #####
+    url = 'https://www.jpl.nasa.gov/spaceimages/?search=&category=Mars'
+    browser.visit(url)
+    time.sleep(2)
 
+    xpath = '//a[@id="full_image"]'
+    results = browser.find_by_xpath(xpath)
+    img = results[0]
+    img.click()
 
-def scrape_image():
+    browser.is_element_present_by_css("img.fancybox-image", wait_time=30)
 
-    browser = init_browser()
-
-    jpl_url = 'https://www.jpl.nasa.gov/spaceimages/?search=&category=Mars'
-    browser.visit(jpl_url)
-
-    browser.is_element_present_by_css("img.fancybox-image", wait_time=1)
-
+    time.sleep(2)
     html = browser.html
     soup = BeautifulSoup(html, 'html.parser')
 
     featured_image_url = soup.find('img', class_='fancybox-image')['src']
-    time_stamp = str(datetime.now())
+    featured_image_url
 
     if "http:" not in featured_image_url:
         featured_image_url = "https://www.jpl.nasa.gov"+featured_image_url
         
-    image_url = {
-        "time": time_stamp,
-        "url": featured_image_url,
-    }
-    
-    return image_url
+    print('Featured Image: ' + str(featured_image_url))
 
-
-def scrape_weather():
-
-    browser = init_browser()
-
+    scrape_data_dict['featured_image'] = featured_image_url
+        
+    ##### SCRAPE WEATHER #####
     url = "https://twitter.com/marswxreport"
     browser.visit(url)
-
+    time.sleep(3)
     html = browser.html
     soup = BeautifulSoup(html, 'html.parser')
 
     import re
     mars_weather = soup.find(string=re.compile("Sol"))
-    time_stamp = str(datetime.now())
 
-    weather = {
-        "time": time_stamp,
-        "weather": mars_weather,
-    }
+    scrape_data_dict['weather'] = mars_weather
 
-    return weather
-
-
-def scrape_facts():
-
-    browser = init_browser()
-
-    import pandas as pd
-
+    ##### SCRAPE FACTS TABLE #####
     url = 'https://space-facts.com/mars/'
-
+    browser.visit
     tables = pd.read_html(url)
-
+    time.sleep(2)
     tables[0]
 
     df = tables[0]
     df.columns = ['Description', 'Value']
 
-    facts = {
-        "desc": df.Description,
-        "value": df.Value,
-    }
+    facts = df.to_html()
+    scrape_data_dict['facts'] = facts
 
-    html_table = df.to_html()
-    html_table
-
-    !open table.html
-
-    return facts
-
-
-def scrape_hemis():
-
+    ##### SCRAPE HEMISPHERES #####
     browser = init_browser()
-
-    import time
-
     executable_path = {'executable_path': '/usr/local/bin/chromedriver'}
     browser = Browser('chrome', **executable_path, headless=False)
-
     url = 'https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars'
     browser.visit(url)
-
     html = browser.html
     soup = BeautifulSoup(html, 'html.parser')
 
@@ -137,4 +106,8 @@ def scrape_hemis():
         mars_hemis.append(img_dict)
         browser.back()
 
-    return mars_hemis
+    scrape_data_dict['mars_hemis'] = mars_hemis
+
+    return scrape_data_dict
+
+    print("Finished Scraping")

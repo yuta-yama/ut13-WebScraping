@@ -1,0 +1,13 @@
+body (
+    background-color: black;
+)
+
+.featured_image {
+    height: 100%;
+    width: 100%;
+    border: 5px solid orange
+    }
+    
+.hemi_box {
+    padding-bottom: 15px;
+}
