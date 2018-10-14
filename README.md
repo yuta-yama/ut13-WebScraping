@@ -1,4 +1,4 @@
-# Final Screen Capture
+# Final Screen Capture - Yuta Yamaguchi
 
 ![mission_to_mars](Images/yuta_mars_screenshot.png)
 
