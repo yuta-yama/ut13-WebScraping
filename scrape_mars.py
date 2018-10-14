@@ -5,6 +5,7 @@ import time
 import collections
 import pymongo
 import pandas as pd
+import os
 
 
 def init_browser():
@@ -41,22 +42,26 @@ def scrape():
     img = results[0]
     img.click()
 
-    browser.is_element_present_by_css("img.fancybox-image", wait_time=1)
+    browser.is_element_present_by_css("img.fancybox-image", wait_time=10)
 
-    time.sleep(2)
+    time.sleep(5)
+
+    results = browser.click_link_by_partial_text('more info')
+
+    time.sleep(5)
+
     html = browser.html
     soup = BeautifulSoup(html, 'html.parser')
 
-    featured_image_url = soup.find('img', class_='fancybox-image')['src']
+    featured_image_url = soup.find('img', class_='main_image')['src']
     featured_image_url
 
-    if "http:" not in featured_image_url:
-        featured_image_url = "https://www.jpl.nasa.gov"+featured_image_url
+    featured_image_url = "https://www.jpl.nasa.gov"+featured_image_url
         
     print('Featured Image: ' + str(featured_image_url))
 
     scrape_data_dict['featured_image'] = featured_image_url
-        
+    
     ##### SCRAPE WEATHER #####
     url = "https://twitter.com/marswxreport"
     browser.visit(url)
@@ -79,7 +84,7 @@ def scrape():
     df = tables[0]
     df.columns = ['Description', 'Value']
 
-    facts = df.to_html()
+    facts = df.to_html(index = False)
     scrape_data_dict['facts'] = facts
 
     ##### SCRAPE HEMISPHERES #####
