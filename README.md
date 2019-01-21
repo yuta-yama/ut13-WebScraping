@@ -9,11 +9,11 @@ A web application that scrapes multiple websites for data related to the Mission
 ## Step 01 - Web Scraping
 Splinter was used to navigate the sites below. BeautifulSoup was used to find and parse out the necessary data from HTML elements.
 
-* NASA Mars News - Scraped [NASA Mars News Site](https://mars.nasa.gov/news/) for the latest news title and paragraph text.
-* JPL Mars Space Images - Scraped [JPL site](https://www.jpl.nasa.gov/spaceimages/?search=&category=Mars) for the featured space image using splinter.
-* Mars Weather - Scraped the [Mars Weather Twitter Account](https://twitter.com/marswxreport?lang=en) for the latest Mars weather tweet.
-* Mars Facts - Scraped the [Mars Facts Webpage](http://space-facts.com/mars/) and used Pandas to scrape the table containing facts about the planet.
-* Mars Hemisphere - Scraped for high resolution images from the [Astrogeology Site](https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars) and displayed them in Bootstrap cards.
+* __NASA Mars News__ - Scraped [NASA Mars News Site](https://mars.nasa.gov/news/) for the latest news title and paragraph text.
+* __JPL Mars Space Images__ - Scraped [JPL site](https://www.jpl.nasa.gov/spaceimages/?search=&category=Mars) for the featured space image using splinter.
+* __Mars Weather__ - Scraped the [Mars Weather Twitter Account](https://twitter.com/marswxreport?lang=en) for the latest Mars weather tweet.
+* __Mars Facts__ - Scraped the [Mars Facts Webpage](http://space-facts.com/mars/) and used Pandas to scrape the table containing facts about the planet.
+* __Mars Hemisphere__ - Scraped for high resolution images from the [Astrogeology Site](https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars) and displayed them in Bootstrap cards.
 
 ## Step 02 - MongoDB and Flask
 
