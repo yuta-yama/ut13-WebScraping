@@ -4,7 +4,7 @@
 A web application that scrapes multiple websites for data related to the Mission to Mars and displays the information in a HTML page using Flask.
 
 ## Tools Used
-Web Scraping, Python, BeautifulSoup, Pandas, Splinter, MongoDB, Flask, HTML, CSS, Bootstrap
+**Web Scraping, Python, BeautifulSoup, Pandas, Splinter, MongoDB, Flask, HTML, CSS, Bootstrap**
 
 ## Step 01 - Web Scraping
 Splinter was used to navigate the sites below. BeautifulSoup was used to find and parse out the necessary data from HTML elements.
